@@ -112,6 +112,70 @@ Director* Director::getInstance()
 
 Director::Director()
 {
+	_purgeDirectorInNextLoop = false;
+	_restartDirectorInNextLoop = false;
+
+	_scheduler = nullptr;
+    _actionManager = nullptr;
+    
+	_eventDispatcher = nullptr;
+    _eventProjectionChanged = nullptr;
+    _eventBeforeDraw =nullptr; 
+    _eventAfterDraw = nullptr;
+    _eventAfterVisit = nullptr;
+    _eventBeforeUpdate = nullptr;
+    _eventAfterUpdate = nullptr;
+    _eventResetDirector = nullptr;
+    _beforeSetNextScene = nullptr;
+    _afterSetNextScene = nullptr;
+        
+	_deltaTime = 0.0f;
+    _deltaTimePassedByCaller = false;
+    
+	_openGLView = nullptr;
+
+	_textureCache = nullptr;
+
+	_animationInterval = 0.0f;
+    _oldAnimationInterval = 0.0f;
+    
+    _displayStats = false;
+    _accumDt = 0.0f;
+    _frameRate = 0.0f;
+    
+    _FPSLabel = nullptr;
+    _drawnBatchesLabel = nullptr;
+    _drawnVerticesLabel = nullptr;
+    
+    _paused = false;
+
+	_totalFrames = 0;
+	_frames = 0;
+	_secondsPerFrame = 1.f;
+    
+	_runningScene = nullptr;
+    
+	_nextScene = nullptr;
+    
+	_sendCleanupToScene = false;
+
+	_nextDeltaTimeZero = false;
+    
+	_projection = Projection::DEFAULT;
+
+    _winSizeInPoints = Size::ZERO;
+    
+    _contentScaleFactor = 1.0f;
+
+    _notificationNode = nullptr;
+
+    _renderer = nullptr;
+
+    _console = nullptr;
+
+    _isStatusLabelUpdated = true;
+
+    _invalid = false;
 }
 
 bool Director::init()

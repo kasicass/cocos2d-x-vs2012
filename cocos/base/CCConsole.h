@@ -114,7 +114,7 @@ public:
     class CC_DLL Command
     {
     public:
-        using Callback = std::function<void(int fd, const std::string& args)>;
+        typedef std::function<void(int fd, const std::string& args)> Callback;
         /** Constructor */
         Command();
         Command(const std::string& name, const std::string& help);

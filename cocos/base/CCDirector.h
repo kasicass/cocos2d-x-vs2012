@@ -592,10 +592,10 @@ protected:
     void reset();
 
     void purgeDirector();
-    bool _purgeDirectorInNextLoop = false; // this flag will be set to true in end()
+    bool _purgeDirectorInNextLoop; // = false; // this flag will be set to true in end()
     
     void restartDirector();
-    bool _restartDirectorInNextLoop = false; // this flag will be set to true in restart()
+    bool _restartDirectorInNextLoop; // = false; // this flag will be set to true in restart()
     
     void setNextScene();
     
@@ -626,66 +626,66 @@ protected:
     /** Scheduler associated with this director
      @since v2.0
      */
-    Scheduler *_scheduler = nullptr;
+    Scheduler *_scheduler;
     
     /** ActionManager associated with this director
      @since v2.0
      */
-    ActionManager *_actionManager = nullptr;
+    ActionManager *_actionManager;
     
     /** EventDispatcher associated with this director
      @since v3.0
      */
-    EventDispatcher* _eventDispatcher = nullptr;
-    EventCustom* _eventProjectionChanged = nullptr;
-    EventCustom* _eventBeforeDraw =nullptr; 
-    EventCustom* _eventAfterDraw = nullptr;
-    EventCustom* _eventAfterVisit = nullptr;
-    EventCustom* _eventBeforeUpdate = nullptr;
-    EventCustom* _eventAfterUpdate = nullptr;
-    EventCustom* _eventResetDirector = nullptr;
-    EventCustom* _beforeSetNextScene = nullptr;
-    EventCustom* _afterSetNextScene = nullptr;
+    EventDispatcher* _eventDispatcher;
+    EventCustom* _eventProjectionChanged;
+    EventCustom* _eventBeforeDraw; 
+    EventCustom* _eventAfterDraw;
+    EventCustom* _eventAfterVisit;
+    EventCustom* _eventBeforeUpdate;
+    EventCustom* _eventAfterUpdate;
+    EventCustom* _eventResetDirector;
+    EventCustom* _beforeSetNextScene;
+    EventCustom* _afterSetNextScene;
         
     /* delta time since last tick to main loop */
-	float _deltaTime = 0.0f;
-    bool _deltaTimePassedByCaller = false;
+	float _deltaTime;
+    bool _deltaTimePassedByCaller;
     
     /* The _openGLView, where everything is rendered, GLView is a abstract class,cocos2d-x provide GLViewImpl
      which inherit from it as default renderer context,you can have your own by inherit from it*/
-    GLView *_openGLView = nullptr;
+    GLView *_openGLView;
 
     //texture cache belongs to this director
-    TextureCache *_textureCache = nullptr;
+    TextureCache *_textureCache;
 
-    float _animationInterval = 0.0f;
-    float _oldAnimationInterval = 0.0f;
+    float _animationInterval;
+    float _oldAnimationInterval;
     
-    bool _displayStats = false;
-    float _accumDt = 0.0f;
-    float _frameRate = 0.0f;
+    bool _displayStats;
+    float _accumDt;
+    float _frameRate;
     
-    LabelAtlas *_FPSLabel = nullptr;
-    LabelAtlas *_drawnBatchesLabel = nullptr;
-    LabelAtlas *_drawnVerticesLabel = nullptr;
+    LabelAtlas *_FPSLabel;
+    LabelAtlas *_drawnBatchesLabel;
+    LabelAtlas *_drawnVerticesLabel;
     
     /** Whether or not the Director is paused */
-    bool _paused = false;
+    bool _paused;
 
     /* How many frames were called since the director started */
-    unsigned int _totalFrames = 0;
-    unsigned int _frames = 0;
-    float _secondsPerFrame = 1.f;
+    unsigned int _totalFrames;
+    unsigned int _frames;
+    float _secondsPerFrame;
     
     /* The running scene */
-    Scene *_runningScene = nullptr;
+    Scene *_runningScene;
     
     /* will be the next 'runningScene' in the next frame
      nextScene is a weak reference. */
-    Scene *_nextScene = nullptr;
+    Scene *_nextScene;
     
     /* If true, then "old" scene will receive the cleanup message */
-    bool _sendCleanupToScene = false;
+    bool _sendCleanupToScene;
 
     /* scheduled scenes */
     Vector<Scene*> _scenesStack;
@@ -694,33 +694,33 @@ protected:
     std::chrono::steady_clock::time_point _lastUpdate;
 
     /* whether or not the next delta time will be zero */
-    bool _nextDeltaTimeZero = false;
+    bool _nextDeltaTimeZero;
     
     /* projection used */
-    Projection _projection = Projection::DEFAULT;
+    Projection _projection;
 
     /* window size in points */
-    Size _winSizeInPoints = Size::ZERO;
+    Size _winSizeInPoints;
     
     /* content scale factor */
-    float _contentScaleFactor = 1.0f;
+    float _contentScaleFactor;
 
     /* This object will be visited after the scene. Useful to hook a notification node */
-    Node *_notificationNode = nullptr;
+    Node *_notificationNode;
 
     /* Renderer for the Director */
-    Renderer *_renderer = nullptr;
+    Renderer *_renderer;
 
     /* Console for the director */
-    Console *_console = nullptr;
+    Console *_console;
 
-    bool _isStatusLabelUpdated = true;
+    bool _isStatusLabelUpdated;
 
     /* cocos2d thread id */
     std::thread::id _cocos2d_thread_id;
 
     /* whether or not the director is in a valid state */
-    bool _invalid = false;
+    bool _invalid;
 
     // GLView will recreate stats labels to fit visible rect
     friend class GLView;

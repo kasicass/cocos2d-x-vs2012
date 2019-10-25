@@ -183,3 +183,7 @@ temp/
 # external libs zip
 *.zip
 **/simulator/
+
+#
+win32-vs2012
+win32-vs2017
