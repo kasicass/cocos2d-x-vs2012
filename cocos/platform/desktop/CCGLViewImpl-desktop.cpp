@@ -220,6 +220,17 @@ GLViewImpl::GLViewImpl(bool initglfw)
         glfwSetErrorCallback(GLFWEventHandler::onGLFWError);
         glfwInit();
     }
+
+	controlUnicode.emplace("\xEF\x9C\x80"); // up
+	controlUnicode.emplace("\xEF\x9C\x81"); // down
+	controlUnicode.emplace("\xEF\x9C\x82"); // left
+	controlUnicode.emplace("\xEF\x9C\x83"); // right
+	controlUnicode.emplace("\xEF\x9C\xA8"); // delete
+	controlUnicode.emplace("\xEF\x9C\xA9"); // home
+	controlUnicode.emplace("\xEF\x9C\xAB"); // end
+	controlUnicode.emplace("\xEF\x9C\xAC"); // pageup
+	controlUnicode.emplace("\xEF\x9C\xAD"); // pagedown
+	controlUnicode.emplace("\xEF\x9C\xB9"); // clear
 }
 
 GLViewImpl::~GLViewImpl()
@@ -461,7 +472,8 @@ void GLViewImpl::setIMEKeyboardState(bool /*bOpen*/)
 
 #if CC_ICON_SET_SUPPORT
 void GLViewImpl::setIcon(const std::string& filename) const {
-    std::vector<std::string> vec = {filename};
+    std::vector<std::string> vec;
+	vec.push_back(filename);
     this->setIcon(vec);
 }
 
@@ -862,18 +874,6 @@ void GLViewImpl::onGLFWCharCallback(GLFWwindow* /*window*/, unsigned int charact
     std::string utf8String;
 
     StringUtils::UTF16ToUTF8( wcharString, utf8String );
-    static std::set<std::string> controlUnicode = {
-        "\xEF\x9C\x80", // up
-        "\xEF\x9C\x81", // down
-        "\xEF\x9C\x82", // left
-        "\xEF\x9C\x83", // right
-        "\xEF\x9C\xA8", // delete
-        "\xEF\x9C\xA9", // home
-        "\xEF\x9C\xAB", // end
-        "\xEF\x9C\xAC", // pageup
-        "\xEF\x9C\xAD", // pagedown
-        "\xEF\x9C\xB9"  // clear
-    };
     // Check for send control key
     if (controlUnicode.find(utf8String) == controlUnicode.end())
     {

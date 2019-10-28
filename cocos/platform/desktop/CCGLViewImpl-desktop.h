@@ -185,7 +185,9 @@ protected:
     GLFWcursor* _cursor;
 
     friend class GLFWEventHandler;
-    
+
+	std::set<std::string> controlUnicode;
+
 public:
     // View will trigger an event when window is resized, gains or loses focus
     static const std::string EVENT_WINDOW_RESIZED;
