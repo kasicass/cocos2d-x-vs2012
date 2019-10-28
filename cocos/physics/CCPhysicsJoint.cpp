@@ -38,7 +38,7 @@ template<typename T>
 class Optional {
 
 public:
-    Optional() {}
+    Optional() :_isSet(false) {}
     Optional(T d) :_isSet(true), _data(d) {}
     Optional(const Optional &t) : _isSet(t._isSet), _data(t._data) {}
 
@@ -50,7 +50,7 @@ public:
     void set(T d)             { _isSet = true; _data = d; }
 
 private:
-    bool _isSet = false;
+    bool _isSet;
     T _data;
 };
 
