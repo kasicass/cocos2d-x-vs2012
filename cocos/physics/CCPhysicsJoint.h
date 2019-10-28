@@ -125,7 +125,7 @@ protected:
     PhysicsBody* _bodyB;
     PhysicsWorld* _world;
 
-    WriteCache *_writeCache = nullptr;
+    WriteCache *_writeCache;
 
     bool _enable;
     bool _collisionEnable;

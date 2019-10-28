@@ -71,6 +71,19 @@ bool SpriteFrameCache::init()
 {
     _spriteFramesAliases.reserve(20);
     _spriteFramesCache.init();
+
+	pixelFormats.emplace("RGBA8888", Texture2D::PixelFormat::RGBA8888);
+	pixelFormats.emplace("RGBA4444", Texture2D::PixelFormat::RGBA4444);
+	pixelFormats.emplace("RGB5A1", Texture2D::PixelFormat::RGB5A1);
+	pixelFormats.emplace("RGBA5551", Texture2D::PixelFormat::RGB5A1);
+	pixelFormats.emplace("RGB565", Texture2D::PixelFormat::RGB565);
+	pixelFormats.emplace("A8", Texture2D::PixelFormat::A8);
+	pixelFormats.emplace("ALPHA", Texture2D::PixelFormat::A8);
+	pixelFormats.emplace("I8", Texture2D::PixelFormat::I8);
+	pixelFormats.emplace("AI88", Texture2D::PixelFormat::AI88);
+	pixelFormats.emplace("ALPHA_INTENSITY", Texture2D::PixelFormat::AI88);
+	pixelFormats.emplace("RGB888", Texture2D::PixelFormat::RGB888);
+
     return true;
 }
 
@@ -288,21 +301,6 @@ void SpriteFrameCache::addSpriteFramesWithDictionary(ValueMap& dict, const std::
     }
     
     Texture2D *texture = nullptr;
-    static std::unordered_map<std::string, Texture2D::PixelFormat> pixelFormats = {
-        {"RGBA8888", Texture2D::PixelFormat::RGBA8888},
-        {"RGBA4444", Texture2D::PixelFormat::RGBA4444},
-        {"RGB5A1", Texture2D::PixelFormat::RGB5A1},
-        {"RGBA5551", Texture2D::PixelFormat::RGB5A1},
-        {"RGB565", Texture2D::PixelFormat::RGB565},
-        {"A8", Texture2D::PixelFormat::A8},
-        {"ALPHA", Texture2D::PixelFormat::A8},
-        {"I8", Texture2D::PixelFormat::I8},
-        {"AI88", Texture2D::PixelFormat::AI88},
-        {"ALPHA_INTENSITY", Texture2D::PixelFormat::AI88},
-        //{"BGRA8888", Texture2D::PixelFormat::BGRA8888}, no Image conversion RGBA -> BGRA
-        {"RGB888", Texture2D::PixelFormat::RGB888}
-    };
-
     auto pixelFormatIt = pixelFormats.find(pixelFormatName);
     if (pixelFormatIt != pixelFormats.end())
     {

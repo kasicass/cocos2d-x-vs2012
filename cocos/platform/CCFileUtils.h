@@ -262,12 +262,7 @@ public:
      *      - Status::TooLarge when there file to be read is too large (> 2^32-1), the buffer will not changed.
      *      - Status::ObtainSizeFailed when failed to obtain the file size, the buffer will not changed.
      */
-    template <
-        typename T,
-        typename Enable = typename std::enable_if<
-            std::is_base_of< ResizableBuffer, ResizableBufferAdapter<T> >::value
-        >::type
-    >
+    template <typename T>
     Status getContents(const std::string& filename, T* buffer) const {
         ResizableBufferAdapter<T> buf(buffer);
         return getContents(filename, &buf);
@@ -984,16 +979,27 @@ protected:
     virtual void valueMapCompact(ValueMap& valueMap) const;
     virtual void valueVectorCompact(ValueVector& valueVector) const;
 
-    template<typename T, typename R, typename ...ARGS>
-    static void performOperationOffthread(T&& action, R&& callback, ARGS&& ...args)
+    template<typename T, typename R>
+    static void performOperationOffthread(T&& action, R&& callback)
+    {
+        auto lambda = [action, callback]() 
+        {
+            Director::getInstance()->getScheduler()->performFunctionInCocosThread(std::bind(callback, action));
+        };
+
+        AsyncTaskPool::getInstance()->enqueue(AsyncTaskPool::TaskType::TASK_IO, [](void*){}, nullptr, std::move(lambda));
+    }
+
+    template<typename T, typename R, typename ARG1>
+    static void performOperationOffthread(T&& action, R&& callback, ARG1&& arg1)
     {
 
         // Visual Studio 2013 does not support using std::bind to forward template parameters into
         // a lambda. To get around this, we will just copy these arguments via lambda capture
 #if defined(_MSC_VER) && _MSC_VER  < 1900 
-        auto lambda = [action, callback, args...]() 
+        auto lambda = [action, callback, arg1]() 
         {
-            Director::getInstance()->getScheduler()->performFunctionInCocosThread(std::bind(callback, action(args...)));
+            Director::getInstance()->getScheduler()->performFunctionInCocosThread(std::bind(callback, action(arg1)));
         };
 #else
         // As cocos2d-x uses c++11, we will use std::bind to leverage move sematics to

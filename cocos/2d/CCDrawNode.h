@@ -341,40 +341,40 @@ protected:
 
     void setupBuffer();
 
-    GLuint      _vao = 0;
-    GLuint      _vbo = 0;
-    GLuint      _vaoGLPoint = 0;
-    GLuint      _vboGLPoint = 0;
-    GLuint      _vaoGLLine = 0;
-    GLuint      _vboGLLine = 0;
+    GLuint      _vao;
+    GLuint      _vbo;
+    GLuint      _vaoGLPoint;
+    GLuint      _vboGLPoint;
+    GLuint      _vaoGLLine;
+    GLuint      _vboGLLine;
 
-    int         _bufferCapacity = 0;
-    GLsizei     _bufferCount = 0;
-    V2F_C4B_T2F *_buffer = nullptr;
+    int         _bufferCapacity;
+    GLsizei     _bufferCount;
+    V2F_C4B_T2F *_buffer;
     
-    int         _bufferCapacityGLPoint = 0;
-    GLsizei     _bufferCountGLPoint = 0;
-    V2F_C4B_T2F *_bufferGLPoint = nullptr;
+    int         _bufferCapacityGLPoint;
+    GLsizei     _bufferCountGLPoint;
+    V2F_C4B_T2F *_bufferGLPoint;
     Color4F     _pointColor;
-    int         _pointSize = 0;
+    int         _pointSize;
     
-    int         _bufferCapacityGLLine = 0;
-    GLsizei     _bufferCountGLLine = 0;
-    V2F_C4B_T2F *_bufferGLLine = nullptr;
+    int         _bufferCapacityGLLine;
+    GLsizei     _bufferCountGLLine;
+    V2F_C4B_T2F *_bufferGLLine;
 
     BlendFunc   _blendFunc;
     CustomCommand _customCommand;
     CustomCommand _customCommandGLPoint;
     CustomCommand _customCommandGLLine;
 
-    bool        _dirty = false;
-    bool        _dirtyGLPoint = false;
-    bool        _dirtyGLLine = false;
-    bool        _isolated = false;
+    bool        _dirty;
+    bool        _dirtyGLPoint;
+    bool        _dirtyGLLine;
+    bool        _isolated;
     
-    GLfloat         _lineWidth = 0.0f;
+    GLfloat         _lineWidth;
 
-    GLfloat  _defaultLineWidth = 0.0f;
+    GLfloat  _defaultLineWidth;
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(DrawNode);
 };

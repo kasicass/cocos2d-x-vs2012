@@ -900,7 +900,7 @@ bool LayerRadialGradient::initWithColor(const cocos2d::Color4B &startColor, cons
 {
     // should do it before Layer::init()
     for (int i = 0; i < 4; ++i)
-        _vertices[i] = {0.0f, 0.0f};
+        _vertices[i].set(0.0f, 0.0f);
     
     if (Layer::init())
     {

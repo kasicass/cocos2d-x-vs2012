@@ -316,6 +316,9 @@ protected:
 
     ValueMap _spriteFramesAliases;
     PlistFramesCache _spriteFramesCache;
+
+private:
+	std::unordered_map<std::string, Texture2D::PixelFormat> pixelFormats;
 };
 
 // end of _2d group

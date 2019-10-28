@@ -110,6 +110,16 @@ const Camera* Camera::getVisitingCamera()
 Camera::Camera()
 {
     _frustum.setClipZ(true);
+
+    Scene* _scene = nullptr; //Scene camera belongs to
+	_viewProjectionDirty = true;
+    _viewProjectionUpdated = false; //Whether or not the viewprojection matrix was updated since the last frame.
+    _cameraFlag = CameraFlag::DEFAULT; // camera flag
+    _frustumDirty = true;
+    _depth = -1;                 //camera depth, the depth of camera with CameraFlag::DEFAULT flag is 0 by default, a camera with larger depth is drawn on top of camera with smaller depth
+
+    _clearBrush = nullptr; //brush used to clear the back ground
+	_fbo = nullptr;
 }
 
 Camera::~Camera()

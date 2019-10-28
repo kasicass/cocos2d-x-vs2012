@@ -47,9 +47,16 @@ typedef SSIZE_T ssize_t;
 #endif
 
 #if _MSC_VER < 1800
-#if !defined(isnan)
-    #define isnan   _isnan
+#ifndef _HUGE_ENUF
+    #define _HUGE_ENUF  1e+300  // _HUGE_ENUF*_HUGE_ENUF must overflow
 #endif
+
+#define INFINITY   ((float)(_HUGE_ENUF * _HUGE_ENUF))
+#define NAN        ((float)(INFINITY * 0.0F))
+
+namespace std {
+	bool isnan(double v) { return _isnan(v) != 0; }
+}
 #endif
 
 #if _MSC_VER < 1900

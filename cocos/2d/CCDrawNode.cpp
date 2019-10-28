@@ -104,6 +104,35 @@ DrawNode::DrawNode(GLfloat lineWidth)
 : _lineWidth(lineWidth)
 , _defaultLineWidth(lineWidth)
 {
+	_vao = 0;
+    _vbo = 0;
+    _vaoGLPoint = 0;
+    _vboGLPoint = 0;
+    _vaoGLLine = 0;
+    _vboGLLine = 0;
+
+    _bufferCapacity = 0;
+    _bufferCount = 0;
+    _buffer = nullptr;
+    
+    _bufferCapacityGLPoint = 0;
+    _bufferCountGLPoint = 0;
+    _bufferGLPoint = nullptr;
+    _pointSize = 0;
+    
+	_bufferCapacityGLLine = 0;
+    _bufferCountGLLine = 0;
+    _bufferGLLine = nullptr;
+
+    _dirty = false;
+    _dirtyGLPoint = false;
+    _dirtyGLLine = false;
+    _isolated = false;
+    
+    _lineWidth = 0.0f;
+
+    _defaultLineWidth = 0.0f;
+
     _blendFunc = BlendFunc::ALPHA_PREMULTIPLIED;
 #if CC_ENABLE_CACHE_TEXTURE_DATA
     // Need to listen the event only when not use batchnode, because it will use VBO
