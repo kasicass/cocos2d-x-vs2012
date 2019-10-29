@@ -818,7 +818,7 @@ float ScrollView::getScrolledPercentHorizontal() const {
     return getInnerContainerPosition().x / minX * 100.f;
 }
 Vec2 ScrollView::getScrolledPercentBothDirection() const {
-    return {getScrolledPercentHorizontal(), getScrolledPercentVertical()};
+    return Vec2(getScrolledPercentHorizontal(), getScrolledPercentVertical());
 }
 
 void ScrollView::jumpToBottom()

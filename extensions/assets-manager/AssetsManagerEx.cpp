@@ -84,12 +84,11 @@ AssetsManagerEx::AssetsManagerEx(const std::string& manifestUrl, const std::stri
     _eventName = EventListenerAssetsManagerEx::LISTENER_ID + pointer;
     _fileUtils = FileUtils::getInstance();
 
-    network::DownloaderHints hints =
-    {
+    network::DownloaderHints hints(
         static_cast<uint32_t>(_maxConcurrentTask),
         DEFAULT_CONNECTION_TIMEOUT,
         ".tmp"
-    };
+    );
     _downloader = std::shared_ptr<network::Downloader>(new network::Downloader(hints));
     _downloader->onTaskError = std::bind(&AssetsManagerEx::onError, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
     _downloader->onTaskProgress = [this](const network::DownloadTask& task,

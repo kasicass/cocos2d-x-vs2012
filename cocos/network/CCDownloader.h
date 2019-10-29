@@ -61,6 +61,14 @@ namespace cocos2d { namespace network {
     class CC_DLL DownloaderHints
     {
     public:
+		DownloaderHints() {}
+
+		DownloaderHints(uint32_t c, uint32_t t, const std::string& temp) {
+			countOfMaxProcessingTasks = c;
+			timeoutInSeconds = t;
+			tempFileNameSuffix = temp;
+		}
+
         uint32_t countOfMaxProcessingTasks;
         uint32_t timeoutInSeconds;
         std::string tempFileNameSuffix;

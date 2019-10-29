@@ -717,7 +717,8 @@ void SIOClientImpl::send(const std::string& endpoint, const std::vector<std::str
 
 void SIOClientImpl::send(const std::string& endpoint, const std::string& s)
 {
-    std::vector<std::string> t{s};
+    std::vector<std::string> t;
+	t.push_back(s);
     send(endpoint, t);
 }
 
@@ -1068,7 +1069,8 @@ void SIOClient::onConnect()
 
 void SIOClient::send(const std::string& s)
 {
-    std::vector<std::string> t{s};
+    std::vector<std::string> t;
+	t.push_back(s);
     send(t);
 }
 

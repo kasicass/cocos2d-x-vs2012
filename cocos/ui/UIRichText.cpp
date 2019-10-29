@@ -300,6 +300,12 @@ private:
     RichText* _richText;
     
     struct TagBehavior {
+		TagBehavior() {}
+		TagBehavior(bool a, const RichText::VisitEnterHandler& b) {
+			isFontElement = a;
+			handleVisitEnter = b;
+		}
+
         bool                isFontElement;
         RichText::VisitEnterHandler   handleVisitEnter;
     };
@@ -822,7 +828,7 @@ void MyXMLVisitor::pushBackElement(RichElement* element)
 
 void MyXMLVisitor::setTagDescription(const std::string& tag, bool isFontElement, RichText::VisitEnterHandler handleVisitEnter)
 {
-    MyXMLVisitor::_tagTables[tag] = {isFontElement, handleVisitEnter};
+    MyXMLVisitor::_tagTables[tag] = TagBehavior(isFontElement, handleVisitEnter);
 }
 
 void MyXMLVisitor::removeTagDescription(const std::string& tag)
