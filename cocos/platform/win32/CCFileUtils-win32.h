@@ -110,7 +110,7 @@ protected:
     virtual bool removeDirectory(const std::string& dirPath) const override;
 
 
-	virtual FileUtils::Status getContents(const std::string& filename, ResizableBuffer* buffer) const override;
+	virtual FileUtils::Status getContentsInternal(const std::string& filename, ResizableBuffer* buffer) const override;
 
     virtual long getFileSize(const std::string &filepath) const override;
 

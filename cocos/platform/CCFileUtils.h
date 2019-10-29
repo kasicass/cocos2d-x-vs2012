@@ -262,12 +262,13 @@ public:
      *      - Status::TooLarge when there file to be read is too large (> 2^32-1), the buffer will not changed.
      *      - Status::ObtainSizeFailed when failed to obtain the file size, the buffer will not changed.
      */
+	virtual Status getContentsInternal(const std::string& filename, ResizableBuffer* buffer) const;
+
     template <typename T>
     Status getContents(const std::string& filename, T* buffer) const {
         ResizableBufferAdapter<T> buf(buffer);
-        return getContents(filename, &buf);
+        return getContentsInternal(filename, &buf);
     }
-    virtual Status getContents(const std::string& filename, ResizableBuffer* buffer) const;
 
     /**
      *  Gets resource file data

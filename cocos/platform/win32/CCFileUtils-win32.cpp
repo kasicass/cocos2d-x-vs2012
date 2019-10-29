@@ -172,7 +172,7 @@ bool FileUtilsWin32::isAbsolutePath(const std::string& strPath) const
 }
 
 
-FileUtils::Status FileUtilsWin32::getContents(const std::string& filename, ResizableBuffer* buffer) const
+FileUtils::Status FileUtilsWin32::getContentsInternal(const std::string& filename, ResizableBuffer* buffer) const
 {
     if (filename.empty())
         return FileUtils::Status::NotExists;

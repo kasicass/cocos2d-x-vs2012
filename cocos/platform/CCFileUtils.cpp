@@ -659,7 +659,7 @@ void FileUtils::getDataFromFile(const std::string& filename, std::function<void(
     }, std::move(callback));
 }
 
-FileUtils::Status FileUtils::getContents(const std::string& filename, ResizableBuffer* buffer) const
+FileUtils::Status FileUtils::getContentsInternal(const std::string& filename, ResizableBuffer* buffer) const
 {
     if (filename.empty())
         return Status::NotExists;
