@@ -19,38 +19,38 @@
  * SOFTWARE.
  */
 
-const char* ccPositionColorLengthTexture_vert = R"(
-
-#ifdef GL_ES
-precision lowp float;
-#endif
-
-#ifdef GL_ES
-attribute mediump vec4 a_position;
-attribute mediump vec2 a_texcoord;
-attribute mediump vec4 a_color;
-
-varying mediump vec4 v_color;
-varying mediump vec2 v_texcoord;
-
-#else
-
-attribute vec4 a_position;
-attribute vec2 a_texcoord;
-attribute vec4 a_color;
-
-varying vec4 v_color;
-varying vec2 v_texcoord;
-
-#endif
-
-uniform float u_alpha;
-
-void main()
-{
-    v_color = vec4(a_color.rgb * a_color.a * u_alpha, a_color.a * u_alpha);
-    v_texcoord = a_texcoord;
-
-    gl_Position = CC_MVPMatrix * a_position;
-}
-)";
+const char* ccPositionColorLengthTexture_vert = "("
+""
+"#ifdef GL_ES"
+"precision lowp float;"
+"#endif"
+""
+"#ifdef GL_ES"
+"attribute mediump vec4 a_position;"
+"attribute mediump vec2 a_texcoord;"
+"attribute mediump vec4 a_color;"
+""
+"varying mediump vec4 v_color;"
+"varying mediump vec2 v_texcoord;"
+""
+"#else"
+""
+"attribute vec4 a_position;"
+"attribute vec2 a_texcoord;"
+"attribute vec4 a_color;"
+""
+"varying vec4 v_color;"
+"varying vec2 v_texcoord;"
+""
+"#endif"
+""
+"uniform float u_alpha;"
+""
+"void main()"
+"{"
+"    v_color = vec4(a_color.rgb * a_color.a * u_alpha, a_color.a * u_alpha);"
+"    v_texcoord = a_texcoord;"
+""
+"    gl_Position = CC_MVPMatrix * a_position;"
+"}"
+")";
