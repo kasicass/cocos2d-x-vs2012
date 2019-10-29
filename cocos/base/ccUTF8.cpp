@@ -233,8 +233,9 @@ struct ConvertTrait<char32_t> {
     typedef UTF32 ArgType;
 };
 
-template <typename From, typename To, typename FromTrait = ConvertTrait<From>, typename ToTrait = ConvertTrait<To>>
-bool utfConvert(
+// template <typename From, typename To, typename FromTrait = ConvertTrait<From>, typename ToTrait = ConvertTrait<To>>
+template <typename From, typename To, typename FromTrait, typename ToTrait>
+static bool utfConvert(
     const std::basic_string<From>& from, std::basic_string<To>& to,
     ConversionResult(*cvtfunc)(const typename FromTrait::ArgType**, const typename FromTrait::ArgType*,
         typename ToTrait::ArgType**, typename ToTrait::ArgType*,
@@ -272,37 +273,36 @@ bool utfConvert(
     to = std::move(working);
 
     return true;
-};
-
+}
 
 bool UTF8ToUTF16(const std::string& utf8, std::u16string& outUtf16)
 {
-    return utfConvert(utf8, outUtf16, ConvertUTF8toUTF16);
+    return utfConvert<char, char16_t, ConvertTrait<char>, ConvertTrait<char16_t>>(utf8, outUtf16, ConvertUTF8toUTF16);
 }
 
 bool UTF8ToUTF32(const std::string& utf8, std::u32string& outUtf32)
 {
-    return utfConvert(utf8, outUtf32, ConvertUTF8toUTF32);
+    return utfConvert<char, char32_t, ConvertTrait<char>, ConvertTrait<char32_t>>(utf8, outUtf32, ConvertUTF8toUTF32);
 }
 
 bool UTF16ToUTF8(const std::u16string& utf16, std::string& outUtf8)
 {
-    return utfConvert(utf16, outUtf8, ConvertUTF16toUTF8);
+    return utfConvert<char16_t, char, ConvertTrait<char16_t>, ConvertTrait<char>>(utf16, outUtf8, ConvertUTF16toUTF8);
 }
     
 bool UTF16ToUTF32(const std::u16string& utf16, std::u32string& outUtf32)
 {
-    return utfConvert(utf16, outUtf32, ConvertUTF16toUTF32);
+    return utfConvert<char16_t, char32_t, ConvertTrait<char16_t>, ConvertTrait<char32_t>>(utf16, outUtf32, ConvertUTF16toUTF32);
 }
 
 bool UTF32ToUTF8(const std::u32string& utf32, std::string& outUtf8)
 {
-    return utfConvert(utf32, outUtf8, ConvertUTF32toUTF8);
+    return utfConvert<char32_t, char, ConvertTrait<char32_t>, ConvertTrait<char>>(utf32, outUtf8, ConvertUTF32toUTF8);
 }
 
 bool UTF32ToUTF16(const std::u32string& utf32, std::u16string& outUtf16)
 {
-    return utfConvert(utf32, outUtf16, ConvertUTF32toUTF16);
+    return utfConvert<char32_t, char16_t, ConvertTrait<char32_t>, ConvertTrait<char16_t>>(utf32, outUtf16, ConvertUTF32toUTF16);
 }
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
