@@ -111,7 +111,7 @@ Camera::Camera()
 {
     _frustum.setClipZ(true);
 
-    Scene* _scene = nullptr; //Scene camera belongs to
+	_scene = nullptr; //Scene camera belongs to
 	_viewProjectionDirty = true;
     _viewProjectionUpdated = false; //Whether or not the viewprojection matrix was updated since the last frame.
     _cameraFlag = CameraFlag::DEFAULT; // camera flag
