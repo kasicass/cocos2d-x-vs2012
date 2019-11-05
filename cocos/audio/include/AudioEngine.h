@@ -339,9 +339,10 @@ protected:
 
         AudioInfo();
         ~AudioInfo();
+
     private:
-        AudioInfo(const AudioInfo& info);
-        AudioInfo(AudioInfo&& info);
+		//AudioInfo(const AudioInfo& info);
+        //AudioInfo(AudioInfo&& info);
         AudioInfo& operator=(const AudioInfo& info);
         AudioInfo& operator=(AudioInfo&& info);
     };
