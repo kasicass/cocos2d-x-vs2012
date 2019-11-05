@@ -177,12 +177,12 @@ bool AudioEngineImpl::init()
 
 AudioCache* AudioEngineImpl::preload(const std::string& filePath, std::function<void(bool)> callback)
 {
-    AudioCache* audioCache = nullptr;
+    std::shared_ptr<AudioCache> audioCache = nullptr;
 
     auto it = _audioCaches.find(filePath);
     if (it == _audioCaches.end()) {
-        audioCache = &_audioCaches[filePath];
-        audioCache->_fileFullPath = FileUtils::getInstance()->fullPathForFilename(filePath);
+		audioCache = std::make_shared<AudioCache>();        
+		audioCache->_fileFullPath = FileUtils::getInstance()->fullPathForFilename(filePath);
         unsigned int cacheId = audioCache->_id;
         auto isCacheDestroyed = audioCache->_isDestroyed;
         AudioEngine::addTask([audioCache, cacheId, isCacheDestroyed](){
@@ -194,16 +194,19 @@ AudioCache* AudioEngineImpl::preload(const std::string& filePath, std::function<
             }
             audioCache->readDataTask(cacheId);
         });
+
+		_audioCaches[filePath] = audioCache;
     }
     else {
-        audioCache = &it->second;
+        audioCache = it->second;
     }
 
     if (audioCache && callback)
     {
         audioCache->addLoadCallback(callback);
     }
-    return audioCache;
+
+    return audioCache.get();
 }
 
 int AudioEngineImpl::play2d(const std::string &filePath ,bool loop ,float volume)

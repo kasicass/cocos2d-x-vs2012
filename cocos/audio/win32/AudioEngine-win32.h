@@ -75,7 +75,7 @@ private:
     std::unordered_map<ALuint, bool> _alSourceUsed;
 
     //filePath,bufferInfo
-    std::unordered_map<std::string, AudioCache> _audioCaches;
+    std::unordered_map<std::string, std::shared_ptr<AudioCache>> _audioCaches;
 
     //audioID,AudioInfo
     std::unordered_map<int, AudioPlayer*>  _audioPlayers;
