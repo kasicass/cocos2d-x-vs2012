@@ -32,6 +32,12 @@ THE SOFTWARE.
 
 #ifndef __MINGW32__
 
+#if _MSC_VER < 1800
+namespace std {
+	bool isnan(double v) { return _isnan(v) != 0; }
+}
+#endif
+
 NS_CC_BEGIN
 
 int gettimeofday(struct timeval * val, struct timezone *)

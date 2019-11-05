@@ -55,7 +55,7 @@ typedef SSIZE_T ssize_t;
 #define NAN        ((float)(INFINITY * 0.0F))
 
 namespace std {
-	bool isnan(double v) { return _isnan(v) != 0; }
+	extern bool isnan(double v);
 }
 #endif
 
